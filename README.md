@@ -3,4 +3,4 @@ GitOps configuration for production EKS clusters
 
 ## Bootstrap guides
 
-- [US East bootstrap and AWS Load Balancer Controller setup](bootstrap/us-east/README.md)
+- [US East AWS Load Balancer Controller setup](bootstrap/us-east/loadbalancer%20setup.md)
