@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-load-balancer-controller
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://aws.github.io/eks-charts
+    chart: aws-load-balancer-controller
+    targetRevision: 3.4.3
+    helm:
+      values: |
+        clusterName: production-europe-eks
+        region: eu-west-1
+        vpcId: vpc-02d1fc050beeae326
+
+        replicaCount: 2
+
+        serviceAccount:
+          create: true
+          name: aws-load-balancer-controller
+  destination:
+    server: arn:aws:eks:eu-west-1:458782777961:cluster/production-europe-eks
+    namespace: kube-system
