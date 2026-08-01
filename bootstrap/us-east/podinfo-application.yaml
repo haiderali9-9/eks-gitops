@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/haiderali9-9/eks-gitops
+    targetRevision: master
+    path: apps/podinfo/us-east
+  destination:
+    server: arn:aws:eks:us-east-1:458782777961:cluster/production-us-east-eks
+    namespace: podinfo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
