@@ -45,8 +45,6 @@ Select `Applications` > `New App`, then enter:
 | Cluster | `production-us-east-eks` |
 | Namespace | `kube-system` |
 
-The cluster must already appear in the cluster dropdown. Enter `kube-system` without leading or trailing spaces. A value such as ` kube-system` causes Argo CD RBAC reconciliation to fail.
-
 ## 5. Add Helm values
 
 Paste only the following chart values into the **Helm Values** box:
@@ -62,8 +60,6 @@ serviceAccount:
   create: true
   name: aws-load-balancer-controller
 ```
-
-Do not wrap these values in `destination:`, `helm:`, or `values: |`. Those fields belong to the Argo CD Application specification, not the Helm chart values.
 
 ## 6. Deploy
 
@@ -83,23 +79,4 @@ Configure `kubectl` and verify the deployment:
 aws eks update-kubeconfig --region us-east-1 --name production-us-east-eks
 kubectl get application aws-load-balancer-controller -n argocd
 kubectl get deployment aws-load-balancer-controller -n kube-system
-kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-load-balancer-controller
-kubectl auth can-i list pods --as=system:serviceaccount:kube-system:aws-load-balancer-controller --all-namespaces
 ```
-
-Expected results:
-
-- The Argo CD application is `Synced` and `Healthy`.
-- The deployment has `2/2` available replicas.
-- Both controller pods are `1/1 Running`.
-- The authorization check returns `yes`.
-
-If the pods fail, inspect the application and controller logs:
-
-```powershell
-kubectl describe application aws-load-balancer-controller -n argocd
-kubectl logs -n kube-system deployment/aws-load-balancer-controller --all-pods=true --tail=200
-kubectl get events -A --sort-by=.lastTimestamp
-```
-
-Common configuration errors are an incorrect cluster name, an invalid region, whitespace in the destination namespace, missing controller RBAC, or missing subnet discovery tags.
