@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: production-europe-eks
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+
+type: Opaque
+
+stringData:
+  name: production-europe-eks
+  server: arn:aws:eks:eu-west-1:458782777961:cluster/production-europe-eks
+  project: default
+
+  #aws eks update-kubeconfig --region eu-west-1 --name production-europe-eks
+  #kubectl apply -f .\bootstrap\europe\register-cluster.yaml
+  #kubectl get secret production-europe-eks -n argocd
