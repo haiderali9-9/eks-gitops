@@ -1,0 +1,67 @@
+<mxfile host="Electron" agent="claude">
+  <diagram name="EKS access" id="eks-access-cheatsheet">
+    <mxGraphModel dx="1169" dy="842" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1220" pageHeight="900" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=24;fontStyle=1;fontColor=#222222;align=left;" value="EKS access" vertex="1">
+          <mxGeometry height="32" width="400" x="60" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="rule" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#D96D30;strokeWidth=3;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="62" y="72" as="sourcePoint" />
+            <mxPoint x="196" y="72" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c1" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#D5D5D5;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="152" width="690" x="60" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#D96D30;align=left;" value="connect" vertex="1">
+          <mxGeometry height="20" width="300" x="78" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="x1" parent="1" style="text;html=1;fontSize=12;align=left;verticalAlign=top;fontColor=#222222;" value="&lt;font face=&quot;Courier New&quot;&gt;aws eks list-clusters --region R&lt;br&gt;aws eks update-kubeconfig --name CL --region R&lt;br&gt;aws eks get-token --cluster-name CL --region R&lt;/font&gt;" vertex="1">
+          <mxGeometry height="66" width="650" x="78" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="w1" parent="1" style="text;html=1;fontSize=11;fontColor=#B23A2E;align=left;" value="token is signed for one cluster name" vertex="1">
+          <mxGeometry height="20" width="650" x="78" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#D5D5D5;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="150" width="690" x="60" y="288" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#D96D30;align=left;" value="access entries&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#999999&quot; style=&quot;font-weight:normal;&quot;&gt;who can get in&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="78" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="x2" parent="1" style="text;html=1;fontSize=12;align=left;verticalAlign=top;fontColor=#222222;" value="&lt;font face=&quot;Courier New&quot;&gt;aws eks list-access-entries --cluster-name CL&lt;br&gt;aws eks create-access-entry --cluster-name CL \&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;--principal-arn ARN --type STANDARD \&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;--kubernetes-groups devs,viewers --username haider&lt;br&gt;aws eks delete-access-entry --cluster-name CL --principal-arn ARN&lt;/font&gt;" vertex="1">
+          <mxGeometry height="82" width="650" x="78" y="328" as="geometry" />
+        </mxCell>
+        <mxCell id="w2" parent="1" style="text;html=1;fontSize=11;fontColor=#666666;align=left;" value="&lt;font face=&quot;Courier New&quot;&gt;--kubernetes-groups&lt;/font&gt; &amp;#8594; your own RBAC bindings&amp;nbsp;&amp;nbsp;&amp;#183;&amp;nbsp;&amp;nbsp;access policies &amp;#8594; AWS managed&amp;nbsp;&amp;nbsp;&amp;#183;&amp;nbsp;&amp;nbsp;either or both" vertex="1">
+          <mxGeometry height="20" width="650" x="78" y="412" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" parent="1" style="rounded=0;html=1;fillColor=none;strokeColor=#D5D5D5;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="196" width="690" x="60" y="464" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#D96D30;align=left;" value="access policies&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#999999&quot; style=&quot;font-weight:normal;&quot;&gt;what they can do&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="400" x="78" y="476" as="geometry" />
+        </mxCell>
+        <mxCell id="x3" parent="1" style="text;html=1;fontSize=12;align=left;verticalAlign=top;fontColor=#222222;" value="&lt;font face=&quot;Courier New&quot;&gt;aws eks list-access-policies&lt;br&gt;&lt;br&gt;aws eks associate-access-policy --cluster-name CL \&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;--principal-arn ARN \&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;--policy-arn arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy \&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;--access-scope type=cluster&lt;br&gt;&lt;br&gt;aws eks list-associated-access-policies --cluster-name CL --principal-arn ARN&lt;/font&gt;" vertex="1">
+          <mxGeometry height="130" width="660" x="78" y="504" as="geometry" />
+        </mxCell>
+        <mxCell id="w3" parent="1" style="text;html=1;fontSize=11;fontColor=#666666;align=left;" value="scope:&amp;nbsp;&amp;nbsp;&lt;font face=&quot;Courier New&quot;&gt;type=cluster&lt;/font&gt;&amp;nbsp;&amp;nbsp;or&amp;nbsp;&amp;nbsp;&lt;font face=&quot;Courier New&quot;&gt;type=namespace,namespaces=dev,test&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="650" x="78" y="636" as="geometry" />
+        </mxCell>
+        <mxCell id="rule2" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#D96D30;strokeWidth=2;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="700" as="sourcePoint" />
+            <mxPoint x="750" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" parent="1" style="text;html=1;fontSize=12;fontColor=#222222;align=left;" value="&lt;font style=&quot;font-size:15px;&quot;&gt;&lt;b&gt;401&lt;/b&gt;&lt;/font&gt;&amp;nbsp;&amp;nbsp;it doesn&#39;t know you&amp;nbsp;&amp;nbsp;&amp;#8594;&amp;nbsp;&amp;nbsp;&lt;font face=&quot;Courier New&quot;&gt;authenticator-*&lt;/font&gt;" vertex="1">
+          <mxGeometry height="24" width="500" x="60" y="716" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="1" style="text;html=1;fontSize=12;fontColor=#222222;align=left;" value="&lt;font style=&quot;font-size:15px;&quot;&gt;&lt;b&gt;403&lt;/b&gt;&lt;/font&gt;&amp;nbsp;&amp;nbsp;it knows you, you can&#39;t&amp;nbsp;&amp;nbsp;&amp;#8594;&amp;nbsp;&amp;nbsp;&lt;font face=&quot;Courier New&quot;&gt;kube-apiserver-audit-*&lt;/font&gt;" vertex="1">
+          <mxGeometry height="24" width="500" x="60" y="744" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
